@@ -12,18 +12,6 @@ const Lil = () => {
     head: null,
     tail: null,
 
-    values: function() {
-      const result = [];
-      let Colin = this.head;
-
-      while (Colin !== null) {
-        result.push(Colin.value);
-        Colin = Colin.next;
-      }
-
-      return result;
-    },
-
     addToStart: function(value) {
       const newNode = Node(value);
 
@@ -37,7 +25,6 @@ const Lil = () => {
       newNode.next = this.head;
       this.head.previous = newNode;
       this.head = newNode;
-
     },
 
     addToEnd: function(value) {
@@ -79,14 +66,14 @@ const Lil = () => {
       }
 
       let count = 0;
-      let Colin = this.head;
+      let current = this.head;
 
       while (count < i) {
-        Colin = Colin.next;
+        current = current.next;
         count++;
       }
 
-      return Colin.value;
+      return current.value;
     },
 
     removeAt: function(i) {
@@ -95,34 +82,25 @@ const Lil = () => {
       }
 
       let count = 0;
-      let Colin = this.head;
+      let current = this.head;
 
       while (count < i) {
-        Colin = Colin.next;
+        current = current.next;
         count++;
       }
 
-      const toBeRemoved = Colin.value;
-      // Colin.next = Colin.next.next;
-      const Jesse = Colin.previous;
-      const Kejal = Colin.next;
+      const toBeRemoved = current.value;
+      // current.next = current.next.next;
+      const previous = current.previous;
+      const next = current.next;
       
-      Jesse.next = Kejal;
-      Kejal.previous = Jesse;
+      previous.next = next;
+      next.previous = previous;
 
       return toBeRemoved;
     },
   }
 }
-
-const lil = Lil();
-lil.addToStart(5);
-lil.addToStart(15);
-lil.addToStart(50);
-lil.addToEnd(500);
-lil.addToEnd(5000);
-const result = lil.values();
-result
 
 
 module.exports = {
